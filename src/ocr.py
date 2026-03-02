@@ -154,6 +154,7 @@ def process(args):
         print("Output Directory is not found.")
         return
     
+    detector=get_detector(args)
     recognizer100=get_recognizer(args=args)
     recognizer30=get_recognizer(args=args,weights_path=args.rec_weights30)
     recognizer50=get_recognizer(args=args,weights_path=args.rec_weights50)
@@ -169,7 +170,7 @@ def process(args):
         resjsonarray=[]
         imgname=os.path.basename(inputpath)
         img_h,img_w=img.shape[:2]
-        detections,classeslist=inference_on_detector(args=args,inputname=imgname,npimage=img,outputpath=args.output,issaveimg=args.viz)
+        detections,classeslist=process_detector(detector,inputname=imgname,npimage=img,outputpath=args.output,issaveimg=args.viz)
         e1=time.time()
         resultobj=[dict(),dict()]
         resultobj[0][0]=list()
